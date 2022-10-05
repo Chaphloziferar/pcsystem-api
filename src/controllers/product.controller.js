@@ -1,4 +1,3 @@
-import jwt from 'jsonwebtoken';
 import Product from '../models/Product';
 import { addProductValidation, getProductValidation, updateProductValidation, updateProductPriceValidation, deleteProductValidation } from '../helpers/productValidation';
 
