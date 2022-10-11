@@ -10,19 +10,23 @@ const addClientValidation = (data) => {
             .min(2)
             .required(),
         secondName: Joi.string()
-            .min(2),
+            .allow('')
+            .required(),
         firstSurname: Joi.string()
             .min(2)
             .required(),
         secondSurname: Joi.string()
-            .min(2),
+            .allow('')
+            .required(),
         email: Joi.string()
             .min(4)
-            .email(),
+            .email()
+            .required(),
         address: Joi.string()
-            .min(4),
+            .allow('')
+            .required(),
         phoneNumber: Joi.string()
-            .min(4)
+            .allow('')
             .required()
     });
 

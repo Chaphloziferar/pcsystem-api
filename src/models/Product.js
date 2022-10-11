@@ -31,4 +31,4 @@ const productSchema = mongoose.Schema({
     versionKey: false
 });
 
-export default mongoose.model("Product", productSchema);
+module.exports = mongoose.models.Product || mongoose.model("Product", productSchema);

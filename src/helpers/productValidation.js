@@ -4,7 +4,7 @@ import Joi from 'joi';
 const addProductValidation = (data) => {
     const schema = Joi.object({
         name: Joi.string()
-            .min(6)
+            .min(2)
             .required(),
         description: Joi.string()
             .min(6)
@@ -24,7 +24,7 @@ const addProductValidation = (data) => {
 const getProductValidation = (data) => {
     const schema = Joi.object({
         name: Joi.string()
-            .min(6)
+            .min(2)
             .required()
     });
 
@@ -35,7 +35,7 @@ const getProductValidation = (data) => {
 const updateProductValidation = (data) => {
     const schema = Joi.object({
         name: Joi.string()
-            .min(6)
+            .min(2)
             .required(),
         description: Joi.string()
             .min(6)
@@ -52,7 +52,7 @@ const updateProductValidation = (data) => {
 const updateProductPriceValidation = (data) => {
     const schema = Joi.object({
         name: Joi.string()
-            .min(6)
+            .min(2)
             .required(),
         price: Joi.number()
             .min(6)
@@ -66,7 +66,7 @@ const updateProductPriceValidation = (data) => {
 const deleteProductValidation = (data) => {
     const schema = Joi.object({
         name: Joi.string()
-            .min(6)
+            .min(2)
             .required()
     });
 
