@@ -15,7 +15,7 @@ const clientSchema = mongoose.Schema({
     },
     secondName: {
         type: String,
-        required: true,
+        required: false,
         min: 2,
         max: 255
     },
@@ -27,7 +27,7 @@ const clientSchema = mongoose.Schema({
     },
     secondSurname: {
         type: String,
-        required: true,
+        required: false,
         min: 2,
         max: 255
     },
@@ -54,4 +54,4 @@ const clientSchema = mongoose.Schema({
     versionKey: false
 });
 
-export default mongoose.model("Client", clientSchema);
+module.exports = mongoose.models.Client || mongoose.model("Client", clientSchema);

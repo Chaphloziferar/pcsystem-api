@@ -49,7 +49,7 @@ const signIn = async (req, res) => {
     const validPass = await User.comparePassword(req.body.password, user.password);
     if (!validPass) return res.status(400).send('Username or password is wrong');
 
-    return res.status(200).json({role: user.role, token: createToken(user)});
+    return res.status(200).json({username: user.username, role: user.role, token: createToken(user)});
 }
 
 const renewToken = async (req, res) => {

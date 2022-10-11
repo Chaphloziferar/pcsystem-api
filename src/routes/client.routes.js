@@ -4,7 +4,7 @@ import { validateToken } from "../middlewares/authJwt";
 
 const router = Router();
 
-router.post("/addClient", validateToken, addClient);
+router.post("/addClient", addClient);
 
 router.get("/getClients", validateToken, getClients);
 

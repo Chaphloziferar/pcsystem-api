@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import authRoutes from './routes/auth.routes';
 import productRoutes from './routes/product.routes';
 import clientRoutes from './routes/client.routes';
+import quoteRoutes from './routes/quote.routes';
 
 // Initialize the app
 env.config();
@@ -29,5 +30,6 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/product', productRoutes);
 app.use('/api/client', clientRoutes);
+app.use('/api/quote', quoteRoutes);
 
 export default app;

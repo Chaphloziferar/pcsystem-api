@@ -40,4 +40,4 @@ userSchema.statics.comparePassword = async (password, hashedPassword) => {
     return await bcrypt.compare(password, hashedPassword);
 }
 
-export default mongoose.model("User", userSchema);
+module.exports = mongoose.models.User || mongoose.model("User", userSchema);
