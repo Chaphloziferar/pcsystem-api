@@ -8,6 +8,7 @@ import authRoutes from './routes/auth.routes';
 import productRoutes from './routes/product.routes';
 import clientRoutes from './routes/client.routes';
 import quoteRoutes from './routes/quote.routes';
+import categoryRoutes from './routes/category.routes';
 
 // Initialize the app
 env.config();
@@ -31,5 +32,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/product', productRoutes);
 app.use('/api/client', clientRoutes);
 app.use('/api/quote', quoteRoutes);
+app.use('/api/category', categoryRoutes);
 
 export default app;
