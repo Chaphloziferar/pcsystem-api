@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
-const productSchema = mongoose.Schema({
+const categorySchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
-        min: 6,
+        min: 4,
         max: 255
     },
     description: {
@@ -13,16 +13,16 @@ const productSchema = mongoose.Schema({
         min: 6,
         max: 255
     },
-    price: {
+    imageUrl: {
+        type: String,
+        required: false,
+        min: 6,
+        max: 255
+    },
+    quantity: {
         type: Number,
         required: true,
-        min: 6,
-        max: 1024
-    },
-    category: {
-        type: String,
-        required: true,
-        min: 4,
+        min: 0,
         max: 255
     }
 }, {
@@ -30,4 +30,4 @@ const productSchema = mongoose.Schema({
     versionKey: false
 });
 
-module.exports = mongoose.models.Product || mongoose.model("Product", productSchema);
+module.exports = mongoose.models.Category || mongoose.model("Category", categorySchema);
