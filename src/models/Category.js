@@ -21,9 +21,7 @@ const categorySchema = mongoose.Schema({
     },
     quantity: {
         type: Number,
-        required: true,
-        min: 0,
-        max: 255
+        required: true
     }
 }, {
     timestamps: true,

@@ -15,15 +15,22 @@ const productSchema = mongoose.Schema({
     },
     price: {
         type: Number,
+        required: true
+    },
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Category",
         required: true,
+    },
+    imageUrl: {
+        type: String,
+        required: false,
         min: 6,
         max: 1024
     },
-    category: {
-        type: String,
-        required: true,
-        min: 4,
-        max: 255
+    stock: {
+        type: Number,
+        required: true
     }
 }, {
     timestamps: true,

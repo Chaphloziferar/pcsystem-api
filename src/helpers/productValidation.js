@@ -10,10 +10,15 @@ const addProductValidation = (data) => {
             .min(6)
             .required(),
         price: Joi.number()
-            .min(6)
             .required(),
         category: Joi.string()
             .min(4)
+            .required(),
+        imageUrl: Joi.string()
+            .min(6)
+            .optional()
+            .allow(""),
+        stock: Joi.number()
             .required()
     });
 
@@ -31,6 +36,17 @@ const getProductValidation = (data) => {
     return schema.validate(data);
 }
 
+// Get Products by Category Validation
+const getProductsByCategoryValidation = (data) => {
+    const schema = Joi.object({
+        category: Joi.string()
+            .min(4)
+            .required()
+    });
+
+    return schema.validate(data);
+}
+
 // Update Product Validation
 const updateProductValidation = (data) => {
     const schema = Joi.object({
@@ -39,9 +55,6 @@ const updateProductValidation = (data) => {
             .required(),
         description: Joi.string()
             .min(6)
-            .required(),
-        category: Joi.string()
-            .min(4)
             .required()
     });
 
@@ -75,6 +88,7 @@ const deleteProductValidation = (data) => {
 
 exports.addProductValidation = addProductValidation;
 exports.getProductValidation = getProductValidation;
+exports.getProductsByCategoryValidation = getProductsByCategoryValidation;
 exports.updateProductValidation = updateProductValidation;
 exports.updateProductPriceValidation = updateProductPriceValidation;
 exports.deleteProductValidation = deleteProductValidation;
