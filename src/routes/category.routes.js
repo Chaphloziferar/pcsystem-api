@@ -6,9 +6,9 @@ const router = Router();
 
 router.post("/addCategory", validateToken, addCategory);
 
-router.get("/getCategories", validateToken, getCategories);
+router.get("/getCategories", getCategories);
 
-router.get("/getCategory", validateToken, getCategory);
+router.get("/getCategory", getCategory);
 
 router.put("/updateCategory", validateToken, updateCategory);
 

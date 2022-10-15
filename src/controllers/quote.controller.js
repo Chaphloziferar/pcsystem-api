@@ -1,7 +1,7 @@
 import Quote from "../models/Quote.js";
 import Client from "../models/Client.js";
 import Product from "../models/Product.js";
-import { addQuoteValidation, addProductToQuoteValidation, deleteProductFromQuoteValidation, getQuoteValidation, deleteQuoteValidation } from "../helpers/quoteValidation.js";
+import { addQuoteValidation, addProductToQuoteValidation, deleteProductFromQuoteValidation, getQuoteValidation, editQuoteStatusValidation, deleteQuoteValidation } from "../helpers/quoteValidation.js";
 
 const addQuote = async (req, res) => {
     // Validate the data
@@ -12,7 +12,7 @@ const addQuote = async (req, res) => {
     if (!findClient) return res.status(400).send("Client not found");
     const clientId = findClient._id;
 
-    const status = "pending";
+    const status = "Pending";
 
     // Create a new quote
     const quote = new Quote({
@@ -23,8 +23,11 @@ const addQuote = async (req, res) => {
     });
 
     try {
-        await quote.save();
-        return res.status(201).send("Quote added");
+        const newQuote = await quote.save();
+        if(!newQuote) return res.status(400).send("Quote not created");
+
+        console.log(newQuote);
+        return res.status(201).json({quote: newQuote});
     } catch (error) {
         return res.status(400).send(error);
     }
@@ -112,12 +115,31 @@ const getQuotes = async (req, res) => {
 
 const getQuote = async (req, res) => {
     // Validate the data
-    const {error} = getQuoteValidation(req.body);
+    const {error} = getQuoteValidation(req.query);
     if (error) return res.status(400).send(error.details[0].message);
 
     try {
-        const quote = await Quote.findOne({_id: req.body.quoteId}).populate("client").populate("products");
+        const quote = await Quote.findOne({_id: req.query.quoteId}).populate("client").populate("products");
         return res.status(200).json({quote: quote});
+    } catch (error) {
+        return res.status(400).send(error);
+    }
+}
+
+const editQuoteStatus = async (req, res) => {
+    // Validate the data
+    const {error} = editQuoteStatusValidation(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
+    const findQuote = await Quote.findById(req.body.quoteId);
+    if (!findQuote) return res.status(400).send("Quote not found");
+
+    const filter = {_id: req.body.quoteId};
+    const update = {status: req.body.status};
+
+    try {
+        const updatedQuote = await Quote.findOneAndUpdate(filter, update, {new: true});
+        return res.status(200).send(updatedQuote);
     } catch (error) {
         return res.status(400).send(error);
     }
@@ -141,4 +163,5 @@ exports.addProductToQuote = addProductToQuote;
 exports.deleteProductFromQuote = deleteProductFromQuote;
 exports.getQuotes = getQuotes;
 exports.getQuote = getQuote;
+exports.editQuoteStatus = editQuoteStatus;
 exports.deleteQuote = deleteQuote;

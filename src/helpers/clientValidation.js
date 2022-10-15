@@ -44,6 +44,18 @@ const getClientValidation = (data) => {
     return schema.validate(data);
 }
 
+// Get Client By Email Validation
+const getClientByEmailValidation = (data) => {
+    const schema = Joi.object({
+        email: Joi.string()
+            .min(4)
+            .email()
+            .required()
+    });
+
+    return schema.validate(data);
+}
+
 // Update Client Validation
 const updateClientValidation = (data) => {
     const schema = Joi.object({
@@ -86,5 +98,6 @@ const deleteClientValidation = (data) => {
 
 exports.addClientValidation = addClientValidation;
 exports.getClientValidation = getClientValidation;
+exports.getClientByEmailValidation = getClientByEmailValidation;
 exports.updateClientValidation = updateClientValidation;
 exports.deleteClientValidation = deleteClientValidation;
