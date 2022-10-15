@@ -1,5 +1,5 @@
 import Client from '../models/client.js';
-import { addClientValidation, getClientValidation, updateClientValidation, deleteClientValidation } from '../helpers/clientValidation.js';
+import { addClientValidation, getClientValidation, getClientByEmailValidation, updateClientValidation, deleteClientValidation } from '../helpers/clientValidation.js';
 
 const addClient = async (req, res) => {
     // Validate the data
@@ -41,11 +41,24 @@ const getClients = async (req, res) => {
 
 const getClient = async (req, res) => {
     // Validate the data
-    const {error} = getClientValidation(req.body);
+    const {error} = getClientValidation(req.query);
     if (error) return res.status(400).send(error.details[0].message);
 
     try {
-        const client = await Client.findOne({dni: req.body.dni});
+        const client = await Client.findOne({dni: req.query.dni});
+        return res.status(200).json({client: client});
+    } catch (error) {
+        return res.status(400).send(error);
+    }
+}
+
+const getClientByEmail = async (req, res) => {
+    // Validate the data
+    const {error} = getClientByEmailValidation(req.query);
+    if (error) return res.status(400).send(error.details[0].message);
+
+    try {
+        const client = await Client.findOne({email: req.query.email});
         return res.status(200).json({client: client});
     } catch (error) {
         return res.status(400).send(error);
@@ -93,5 +106,6 @@ const deleteClient = async (req, res) => {
 exports.addClient = addClient;
 exports.getClients = getClients;
 exports.getClient = getClient;
+exports.getClientByEmail = getClientByEmail;
 exports.updateClient = updateClient;
 exports.deleteClient = deleteClient;

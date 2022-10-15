@@ -44,7 +44,7 @@ const addProduct = async (req, res) => {
 
 const getProducts = async (req, res) => {
     try {
-        const products = await Product.find();
+        const products = await Product.find().populate('category');
         return res.status(200).json({products: products});
     } catch (error) {
         return res.status(400).send(error);
@@ -53,11 +53,11 @@ const getProducts = async (req, res) => {
 
 const getProduct = async (req, res) => {
     // Validate the data
-    const {error} = getProductValidation(req.body);
+    const {error} = getProductValidation(req.query);
     if (error) return res.status(400).send(error.details[0].message);
 
     try {
-        const product = await Product.findOne({name: req.body.name});
+        const product = await Product.findOne({name: req.query.name}).populate('category');
         return res.status(200).json({product: product});
     } catch (error) {
         return res.status(400).send(error);
@@ -66,14 +66,14 @@ const getProduct = async (req, res) => {
 
 const getProductsByCategory = async (req, res) => {
     // Validate the data
-    const {error} = getProductsByCategoryValidation(req.body);
+    const {error} = getProductsByCategoryValidation(req.query);
     if (error) return res.status(400).send(error.details[0].message);
 
     try {
-        const category = await Category.findOne({name: req.body.category});
+        const category = await Category.findOne({name: req.query.category});
         if (!category) return res.status(400).send('Category does not exist');
 
-        const products = await Product.find({category: category._id});
+        const products = await Product.find({category: category._id}).populate('category');
         return res.status(200).json({products: products});
     } catch (error) {
         return res.status(400).send(error);

@@ -50,6 +50,20 @@ const getQuoteValidation = (data) => {
     return schema.validate(data);
 }
 
+// Edit Quote Status Validation
+const editQuoteStatusValidation = (data) => {
+    const schema = Joi.object({
+        quoteId: Joi.string()
+            .min(4)
+            .required(),
+        status: Joi.string()
+            .min(4)
+            .required()
+    });
+
+    return schema.validate(data);
+}
+
 // Delete Quote Validation
 const deleteQuoteValidation = (data) => {
     const schema = Joi.object({
@@ -65,4 +79,5 @@ exports.addQuoteValidation = addQuoteValidation;
 exports.addProductToQuoteValidation = addProductToQuoteValidation;
 exports.deleteProductFromQuoteValidation = deleteProductFromQuoteValidation;
 exports.getQuoteValidation = getQuoteValidation;
+exports.editQuoteStatusValidation = editQuoteStatusValidation;
 exports.deleteQuoteValidation = deleteQuoteValidation;

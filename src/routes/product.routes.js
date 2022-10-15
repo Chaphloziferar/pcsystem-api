@@ -6,11 +6,11 @@ const router = Router();
 
 router.post("/addProduct", validateToken, addProduct);
 
-router.get("/getProducts", validateToken, getProducts);
+router.get("/getProducts", getProducts);
 
-router.get("/getProduct", validateToken, getProduct);
+router.get("/getProduct", getProduct);
 
-router.get("/getProductsByCategory", validateToken, getProductsByCategory);
+router.get("/getProductsByCategory", getProductsByCategory);
 
 router.put("/updateProduct", validateToken, updateProduct);
 
